@@ -47,16 +47,21 @@ function createNotesStore() {
 		},
 
 		createNote: (title?: string) => {
+			console.log('Creating new note with title:', title);
 			const newNote: Note = {
-				id: crypto.randomUUID(),
+				id: crypto?.randomUUID
+					? crypto.randomUUID()
+					: `note-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
 				title: title || 'Untitled',
 				content: '',
 				createdAt: new Date(),
 				updatedAt: new Date()
 			};
+			console.log('New note created:', newNote);
 
 			update((notes) => {
 				const updatedNotes = [newNote, ...notes];
+				console.log('Updated notes array:', updatedNotes);
 				if (browser) {
 					localStorage.setItem('noty-notes', JSON.stringify(updatedNotes));
 				}
@@ -67,6 +72,7 @@ function createNotesStore() {
 			if (browser) {
 				localStorage.setItem('noty-active-note', newNote.id);
 			}
+			console.log('New note set as active:', newNote.id);
 
 			return newNote.id;
 		},

@@ -31,11 +31,14 @@
 	});
 
 	function createNewNote() {
+		console.log('Sidebar createNewNote called');
 		notesStore.createNote();
+		console.log('Note created, current collapsed state:', isCollapsed);
 		// Auto-expand sidebar after creating note for better UX
 		if (isCollapsed) {
 			isCollapsed = false;
 			dispatch('toggle', isCollapsed);
+			console.log('Sidebar expanded after creating note');
 		}
 	}
 

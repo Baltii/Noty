@@ -182,6 +182,7 @@
 	}
 
 	function handleCreateNewNote() {
+		console.log('Main page handleCreateNewNote called');
 		notesStore.createNote();
 	}
 </script>
